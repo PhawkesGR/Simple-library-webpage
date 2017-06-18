@@ -14,14 +14,16 @@ function addBook(){
 				var xmlhttp = new XMLHttpRequest();
 				xmlhttp.onreadystatechange = function() {
 					if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-						//alert(this.responseText);
+						console.log(this.responseText);
 						var obj = JSON.parse(this.responseText);
 						alert(obj.status_message);
 					}
 				}
-				//xmlhttp.open("POST","addbook.php?title="+title+"&author="+author+"&genre="+genre+"&price="+price,true);
-				xmlhttp.open("POST","books.php?title="+title+"&author="+author+"&genre="+genre+"&price="+price,true);
-				xmlhttp.send();
+				//xmlhttp.open("POST","books.php?title="+title+"&author="+author+"&genre="+genre+"&price="+price,true);
+				xmlhttp.open("POST","books.php",true);
+				var parameters= "title="+title+"&author="+author+"&genre="+genre+"&price="+price;
+				xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+				xmlhttp.send(parameters);
 }
 
 function getBook(){
